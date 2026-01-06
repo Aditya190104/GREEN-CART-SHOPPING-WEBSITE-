@@ -1,0 +1,25 @@
+let cart = [];
+
+function addItem(name, price, qty) {
+    let item = {
+        productName: name,
+        price: price,
+        quantity: qty,
+        total: price * qty
+    };
+    cart.push(item);
+}
+
+function showCart() {
+    cart.forEach(item => {
+        console.log(
+            item.productName +
+            " Qty:" + item.quantity +
+            " Total: ₹" + item.total
+        );
+    });
+}
+
+addItem("Apples", 120, 2);
+addItem("Milk", 50, 1);
+showCart();
