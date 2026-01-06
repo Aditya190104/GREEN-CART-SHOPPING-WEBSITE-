@@ -1,0 +1,42 @@
+/**
+ * Repository layer for product queries
+ */
+
+const Product = require("../models/product.model");
+
+async function findAll(filters, pagination) {
+    const query = {};
+
+    if (filters.category) {
+        query.category = filters.category;
+    }
+
+    if (filters.search) {
+        query.name = { $regex: filters.search, $options: "i" };
+    }
+
+    if (filters.minPrice || filters.maxPrice) {
+        query.price = {};
+        if (filters.minPrice) query.price.$gte = Number(filters.minPrice);
+        if (filters.maxPrice) query.price.$lte = Number(filters.maxPrice);
+    }
+
+    const total = await Product.countDocuments(query);
+
+    const products = await Product.find(query)
+        .skip(pagination.skip)
+        .limit(pagination.limit)
+        .sort(pagination.sort);
+
+    return { products, total };
+}
+
+async function create(data) {
+    const product = new Product(data);
+    return await product.save();
+}
+
+module.exports = {
+    findAll,
+    create
+};
