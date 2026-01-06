@@ -1,0 +1,23 @@
+/**
+ * Centralized configuration file for GreenCart
+ * Handles environment variables and app-level settings
+ */
+
+require("dotenv").config();
+
+const config = {
+    app: {
+        name: "GreenCart",
+        port: process.env.PORT || 3000,
+        env: process.env.NODE_ENV || "development"
+    },
+    database: {
+        url: process.env.MONGO_URL || "mongodb://localhost:27017/greencart"
+    },
+    security: {
+        saltRounds: 10,
+        jwtSecret: process.env.JWT_SECRET || "greencart_secret_key"
+    }
+};
+
+module.exports = config;
