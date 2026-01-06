@@ -1,0 +1,17 @@
+function checkout(name, address, payment) {
+
+    if (name === "" || address === "") {
+        console.log("User details required");
+        return;
+    }
+
+    if (payment !== "COD" && payment !== "Online") {
+        console.log("Invalid payment method");
+        return;
+    }
+
+    console.log("Checkout successful");
+    console.log("Order placed by:", name);
+}
+
+checkout("Aditya", "Patna, Bihar", "COD");
