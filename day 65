@@ -1,0 +1,33 @@
+/**
+ * Simple in-memory caching service
+ * Improves performance by reducing DB calls
+ */
+
+class CacheService {
+    constructor(ttl = 300000) {
+        this.cache = new Map();
+        this.ttl = ttl;
+    }
+
+    set(key, value) {
+        const expiry = Date.now() + this.ttl;
+        this.cache.set(key, { value, expiry });
+    }
+
+    get(key) {
+        const data = this.cache.get(key);
+        if (!data) return null;
+
+        if (Date.now() > data.expiry) {
+            this.cache.delete(key);
+            return null;
+        }
+        return data.value;
+    }
+
+    clear() {
+        this.cache.clear();
+    }
+}
+
+module.exports = new CacheService();
