@@ -1,0 +1,29 @@
+/**
+ * Order schema with status lifecycle
+ */
+
+const mongoose = require("mongoose");
+
+const orderSchema = new mongoose.Schema({
+    userId: mongoose.Schema.Types.ObjectId,
+    items: [
+        {
+            productId: mongoose.Schema.Types.ObjectId,
+            quantity: Number,
+            price: Number
+        }
+    ],
+    totalAmount: Number,
+    status: {
+        type: String,
+        enum: ["PLACED", "CONFIRMED", "SHIPPED", "DELIVERED", "CANCELLED"],
+        default: "PLACED"
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+module.exports = mongoose.model("Order", orderSchema);
+
