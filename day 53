@@ -1,0 +1,37 @@
+/**
+ * Pagination and sorting helper
+ */
+
+function buildPagination(queryParams) {
+    const page = Math.max(parseInt(queryParams.page) || 1, 1);
+    const limit = Math.min(parseInt(queryParams.limit) || 10, 100);
+    const sortBy = queryParams.sortBy || "createdAt";
+    const order = queryParams.order === "asc" ? 1 : -1;
+
+    return {
+        skip: (page - 1) * limit,
+        limit,
+        sort: { [sortBy]: order },
+        meta: {
+            page,
+            limit
+        }
+    };
+}
+
+function buildResponse(data, total, meta) {
+    return {
+        meta: {
+            total,
+            page: meta.page,
+            limit: meta.limit,
+            pages: Math.ceil(total / meta.limit)
+        },
+        data
+    };
+}
+
+module.exports = {
+    buildPagination,
+    buildResponse
+};
