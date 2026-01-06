@@ -1,0 +1,43 @@
+/**
+ * Inventory controller
+ */
+
+const inventoryService = require("../services/inventory.service");
+
+const reduce = async (req, res) => {
+    try {
+        const { productId, quantity } = req.body;
+        const product = await inventoryService.reduceStock(productId, quantity);
+
+        res.json({
+            success: true,
+            message: "Stock updated",
+            data: product
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const restock = async (req, res) => {
+    try {
+        const { productId, quantity } = req.body;
+        const product = await inventoryService.restockProduct(productId, quantity);
+
+        res.json({
+            success: true,
+            message: "Product restocked",
+            data: product
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+module.exports = { reduce, restock };
