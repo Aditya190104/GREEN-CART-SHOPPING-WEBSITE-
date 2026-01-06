@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Summary</title>
+</head>
+<body>
+
+<h2>Order Details</h2>
+
+<ul>
+    <li>Apples - 1kg</li>
+    <li>Milk - 1 litre</li>
+</ul>
+
+<p>Total Amount: ₹170</p>
+
+<button onclick="confirmOrder()">Confirm Order</button>
+
+<script>
+function confirmOrder() {
+    alert("Order Placed Successfully");
+}
+</script>
+
+</body>
+</html>
