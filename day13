@@ -1,0 +1,17 @@
+const products = [
+    { name: "Apples", price: 120, category: "Fruits" },
+    { name: "Milk", price: 50, category: "Dairy" },
+    { name: "Rice", price: 60, category: "Grains" }
+];
+
+function displayProducts() {
+    products.forEach(product => {
+        console.log(
+            product.name + 
+            " - ₹" + product.price + 
+            " (" + product.category + ")"
+        );
+    });
+}
+
+displayProducts();
