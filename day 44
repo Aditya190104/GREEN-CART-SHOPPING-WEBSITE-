@@ -1,0 +1,25 @@
+/**
+ * Standard API response formatter
+ */
+
+function successResponse(res, data, message = "Success", status = 200) {
+    return res.status(status).json({
+        success: true,
+        message,
+        data,
+        timestamp: new Date().toISOString()
+    });
+}
+
+function errorResponse(res, message = "Error", status = 500) {
+    return res.status(status).json({
+        success: false,
+        message,
+        timestamp: new Date().toISOString()
+    });
+}
+
+module.exports = {
+    successResponse,
+    errorResponse
+};
