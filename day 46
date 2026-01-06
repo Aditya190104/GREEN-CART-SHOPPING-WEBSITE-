@@ -1,0 +1,40 @@
+/**
+ * Inventory service for stock management
+ */
+
+const Product = require("../models/product.model");
+
+async function reduceStock(productId, quantity) {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+        throw new Error("Product not found");
+    }
+
+    if (product.stock < quantity) {
+        throw new Error("Insufficient stock");
+    }
+
+    product.stock -= quantity;
+    await product.save();
+
+    return product;
+}
+
+async function restockProduct(productId, quantity) {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+        throw new Error("Product not found");
+    }
+
+    product.stock += quantity;
+    await product.save();
+
+    return product;
+}
+
+module.exports = {
+    reduceStock,
+    restockProduct
+};
