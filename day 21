@@ -1,0 +1,27 @@
+/**
+ * Database connection handler using Mongoose
+ * Ensures clean connection and error handling
+ */
+
+const mongoose = require("mongoose");
+const config = require("../config/config");
+
+const connectDatabase = async () => {
+    try {
+        await mongoose.connect(config.database.url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log("MongoDB connected successfully");
+    } catch (error) {
+        console.error("Database connection failed");
+        console.error(error.message);
+        process.exit(1);
+    }
+};
+
+mongoose.connection.on("disconnected", () => {
+    console.warn("MongoDB disconnected");
+});
+
+module.exports = connectDatabase;
