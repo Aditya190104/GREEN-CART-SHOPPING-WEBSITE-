@@ -1,0 +1,32 @@
+/**
+ * Final application bootstrap with metrics
+ */
+
+const express = require("express");
+const os = require("os");
+const config = require("../config");
+const connectDatabase = require("../database/database");
+
+const app = express();
+app.use(express.json());
+
+app.get("/health", (req, res) => {
+    res.json({
+        status: "UP",
+        app: config.app.name,
+        environment: config.app.env,
+        uptime: process.uptime(),
+        memory: process.memoryUsage(),
+        cpu: os.cpus().length,
+        timestamp: new Date().toISOString()
+    });
+});
+
+(async () => {
+    await connectDatabase();
+    app.listen(config.app.port, () => {
+        console.log(
+            `${config.app.name} running on port ${config.app.port}`
+        );
+    });
+})();
