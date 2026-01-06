@@ -1,0 +1,25 @@
+/**
+ * Notification service (email/SMS simulation)
+ */
+
+function sendOrderConfirmation(user, order) {
+    return {
+        to: user.email,
+        subject: "GreenCart Order Confirmation",
+        message: `Hello ${user.name}, your order ${order._id} is confirmed.`,
+        sentAt: new Date()
+    };
+}
+
+function sendStatusUpdate(user, status) {
+    return {
+        to: user.email,
+        message: `Your order status is now: ${status}`,
+        sentAt: new Date()
+    };
+}
+
+module.exports = {
+    sendOrderConfirmation,
+    sendStatusUpdate
+};
