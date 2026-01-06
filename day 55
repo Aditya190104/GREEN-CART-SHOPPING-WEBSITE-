@@ -1,0 +1,43 @@
+/**
+ * Product controller with repository abstraction
+ */
+
+const productRepo = require("../repositories/product.repository");
+const { buildPagination, buildResponse } = require("../utils/pagination");
+
+const getProducts = async (req, res) => {
+    try {
+        const pagination = buildPagination(req.query);
+
+        const { products, total } = await productRepo.findAll(
+            req.query,
+            pagination
+        );
+
+        res.json(
+            buildResponse(products, total, pagination.meta)
+        );
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const createProduct = async (req, res) => {
+    try {
+        const product = await productRepo.create(req.body);
+        res.status(201).json({
+            success: true,
+            data: product
+        });
+    } catch (error) {
+        res.status(400).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+module.exports = { getProducts, createProduct };
