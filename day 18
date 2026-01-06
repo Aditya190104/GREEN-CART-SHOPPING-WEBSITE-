@@ -1,0 +1,32 @@
+const express = require("express");
+const router = express.Router();
+
+router.get("/products", (req, res) => {
+    res.json({ message: "Product list fetched" });
+});
+
+router.post("/add-product", (req, res) => {
+    res.json({ message: "Product added successfully" });
+});
+
+router.delete("/delete-product", (req, res) => {
+    res.json({ message: "Product removed" });
+});
+
+module.exports = router;
+function registerUser(user) {
+    if (!user.email || !user.password) {
+        return "Invalid user data";
+    }
+    return "User registered successfully";
+}
+
+function loginUser(email, password) {
+    if (email === "admin@greencart.com" && password === "1234") {
+        return "Login successful";
+    }
+    return "Invalid credentials";
+}
+
+console.log(registerUser({ email: "test@mail.com", password: "1234" }));
+console.log(loginUser("admin@greencart.com", "1234"));
