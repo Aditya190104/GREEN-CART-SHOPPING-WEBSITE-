@@ -1,0 +1,35 @@
+/**
+ * Authentication business logic
+ */
+
+const bcrypt = require("bcrypt");
+const User = require("../models/user.model");
+
+async function registerUser(userData) {
+    const existingUser = await User.findOne({ email: userData.email });
+    if (existingUser) {
+        throw new Error("Email already registered");
+    }
+
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+
+    const user = new User({
+        name: userData.name,
+        email: userData.email,
+        password: hashedPassword
+    });
+
+    return await user.save();
+}
+
+async function loginUser(email, password) {
+    const user = await User.findOne({ email });
+    if (!user) throw new Error("Invalid credentials");
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) throw new Error("Invalid credentials");
+
+    return user;
+}
+
+module.exports = { registerUser, loginUser };
