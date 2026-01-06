@@ -1,0 +1,31 @@
+/**
+ * Cart service with dynamic price calculation
+ */
+
+const Cart = require("../models/cart.model");
+const Product = require("../models/product.model");
+
+async function calculateCartTotal(items) {
+    let total = 0;
+
+    for (const item of items) {
+        const product = await Product.findById(item.productId);
+        if (!product) {
+            throw new Error("Product not found");
+        }
+        total += product.price * item.quantity;
+    }
+    return total;
+}
+
+async function updateCart(userId, items) {
+    const totalAmount = await calculateCartTotal(items);
+
+    return await Cart.findOneAndUpdate(
+        { userId },
+        { items, totalAmount, updatedAt: new Date() },
+        { upsert: true, new: true }
+    );
+}
+
+module.exports = { updateCart };
