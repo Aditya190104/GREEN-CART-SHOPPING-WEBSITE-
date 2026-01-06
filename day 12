@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Card</title>
+</head>
+<body>
+
+<div style="border:1px solid #ccc; width:250px; padding:15px;">
+    <h3>Organic Apples</h3>
+    <p>Category: Fruits</p>
+    <p>Price: ₹120/kg</p>
+    <p>Status: In Stock</p>
+    <button>Add to Cart</button>
+</div>
+
+<div style="border:1px solid #ccc; width:250px; padding:15px; margin-top:20px;">
+    <h3>Fresh Milk</h3>
+    <p>Category: Dairy</p>
+    <p>Price: ₹50/litre</p>
+    <button>Add to Cart</button>
+</div>
+
+</body>
+</html>
