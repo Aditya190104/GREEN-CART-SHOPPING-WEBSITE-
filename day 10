@@ -1,0 +1,18 @@
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GreenCart Navbar</title>
+</head>
+<body>
+
+<nav style="background:#2e7d32; padding:15px;">
+    <span style="color:white; font-size:20px;">GreenCart</span>
+    <a href="index.html" style="color:white; margin-left:20px;">Home</a>
+    <a href="products.html" style="color:white; margin-left:20px;">Products</a>
+    <a href="cart.html" style="color:white; margin-left:20px;">Cart</a>
+    <a href="login.html" style="color:white; margin-left:20px;">Login</a>
+</nav>
+
+</body>
+</html>
