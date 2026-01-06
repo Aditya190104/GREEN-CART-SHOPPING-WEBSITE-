@@ -1,0 +1,25 @@
+/**
+ * Payment simulation service
+ */
+
+function processPayment(method, amount) {
+    if (!method || amount <= 0) {
+        throw new Error("Invalid payment details");
+    }
+
+    const supportedMethods = ["COD", "CARD", "UPI"];
+
+    if (!supportedMethods.includes(method)) {
+        throw new Error("Payment method not supported");
+    }
+
+    return {
+        paymentId: "PAY" + Date.now(),
+        status: "SUCCESS",
+        method,
+        amount,
+        processedAt: new Date()
+    };
+}
+
+module.exports = { processPayment };
