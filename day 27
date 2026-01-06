@@ -1,0 +1,29 @@
+/**
+ * Product business logic
+ */
+
+const Product = require("../models/product.model");
+
+async function getProducts(filter = {}) {
+    const query = {};
+
+    if (filter.category) {
+        query.category = filter.category;
+    }
+
+    if (filter.minPrice && filter.maxPrice) {
+        query.price = {
+            $gte: filter.minPrice,
+            $lte: filter.maxPrice
+        };
+    }
+
+    return await Product.find(query).sort({ createdAt: -1 });
+}
+
+async function createProduct(productData) {
+    const product = new Product(productData);
+    return await product.save();
+}
+
+module.exports = { getProducts, createProduct };
