@@ -1,0 +1,35 @@
+/**
+ * Main application entry point
+ */
+
+const express = require("express");
+const config = require("../config/config");
+const connectDatabase = require("../database/database");
+const userRoutes = require("../routes/user.routes");
+const errorHandler = require("../middleware/error.middleware");
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use("/api/users", userRoutes);
+
+// Health check
+app.get("/", (req, res) => {
+    res.send("GreenCart API is running");
+});
+
+// Error handler
+app.use(errorHandler);
+
+// Start server
+(async () => {
+    await connectDatabase();
+    app.listen(config.app.port, () => {
+        console.log(
+            `${config.app.name} running on port ${config.app.port} in ${config.app.env} mode`
+        );
+    });
+})();
