@@ -1,0 +1,29 @@
+/**
+ * Product controller with pagination and filtering
+ */
+
+const productService = require("../services/product.service");
+
+const getProducts = async (req, res) => {
+    try {
+        const { category, minPrice, maxPrice, page = 1, limit = 10 } = req.query;
+
+        const products = await productService.getProducts(
+            { category, minPrice, maxPrice },
+            { page, limit }
+        );
+
+        res.json({
+            success: true,
+            count: products.length,
+            data: products
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+module.exports = { getProducts };
