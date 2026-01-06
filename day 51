@@ -1,0 +1,33 @@
+/**
+ * Advanced configuration loader with validation
+ */
+
+require("dotenv").config();
+
+function getEnv(key, defaultValue = null) {
+    const value = process.env[key];
+    if (!value && defaultValue === null) {
+        throw new Error(`Environment variable ${key} is missing`);
+    }
+    return value || defaultValue;
+}
+
+const config = {
+    app: {
+        name: getEnv("APP_NAME", "GreenCart"),
+        port: Number(getEnv("PORT", 3000)),
+        env: getEnv("NODE_ENV", "development")
+    },
+    database: {
+        uri: getEnv("MONGO_URI", "mongodb://localhost:27017/greencart")
+    },
+    security: {
+        jwtSecret: getEnv("JWT_SECRET", "super_secret_key"),
+        tokenExpiry: "2h"
+    },
+    logging: {
+        level: getEnv("LOG_LEVEL", "info")
+    }
+};
+
+module.exports = config;
