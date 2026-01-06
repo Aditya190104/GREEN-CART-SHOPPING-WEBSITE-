@@ -1,0 +1,29 @@
+/**
+ * Product service with pagination support
+ */
+
+const Product = require("../models/product.model");
+
+async function getProducts(filters, pagination) {
+    const query = {};
+
+    if (filters.category) {
+        query.category = filters.category;
+    }
+
+    if (filters.minPrice && filters.maxPrice) {
+        query.price = {
+            $gte: Number(filters.minPrice),
+            $lte: Number(filters.maxPrice)
+        };
+    }
+
+    const skip = (pagination.page - 1) * pagination.limit;
+
+    return await Product.find(query)
+        .skip(skip)
+        .limit(Number(pagination.limit))
+        .sort({ createdAt: -1 });
+}
+
+module.exports = { getProducts };
