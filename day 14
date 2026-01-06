@@ -1,0 +1,15 @@
+const items = ["Apples", "Milk", "Rice", "Wheat", "Vegetables"];
+
+function searchItem(keyword) {
+    let result = items.filter(item =>
+        item.toLowerCase().includes(keyword.toLowerCase())
+    );
+
+    if (result.length > 0) {
+        console.log("Found:", result);
+    } else {
+        console.log("No item found");
+    }
+}
+
+searchItem("milk");
