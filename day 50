@@ -1,0 +1,23 @@
+/**
+ * Admin dashboard analytics
+ */
+
+const Order = require("../models/order.model");
+const User = require("../models/user.model");
+
+async function getDashboardMetrics() {
+    const totalOrders = await Order.countDocuments();
+    const totalUsers = await User.countDocuments();
+
+    const revenueData = await Order.aggregate([
+        { $group: { _id: null, revenue: { $sum: "$totalAmount" } } }
+    ]);
+
+    return {
+        totalOrders,
+        totalUsers,
+        totalRevenue: revenueData[0]?.revenue || 0
+    };
+}
+
+module.exports = { getDashboardMetrics };
