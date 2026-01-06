@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GreenCart | Products</title>
+</head>
+<body>
+
+<h2>Available Products</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Product</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td>Apples</td>
+        <td>Fruits</td>
+        <td>₹120/kg</td>
+        <td>In Stock</td>
+    </tr>
+    <tr>
+        <td>Milk</td>
+        <td>Dairy</td>
+        <td>₹50/litre</td>
+        <td>Available</td>
+    </tr>
+</table>
+
+</body>
+</html>
+
