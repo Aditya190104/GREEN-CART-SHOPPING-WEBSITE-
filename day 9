@@ -1,0 +1,33 @@
+const express = require("express");
+const app = express();
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+    res.send("GreenCart Server Running");
+});
+
+app.post("/register", (req, res) => {
+    res.send("User Registered Successfully");
+});
+
+app.listen(3000, () => {
+    console.log("Server started on port 3000");
+  
+});
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://localhost:27017/greencart")
+.then(() => console.log("MongoDB Connected"))
+.catch(err => console.log(err));
+
+const userSchema = new mongoose.Schema({
+    name: String,
+    email: String,
+    password: String
+});
+
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;
+
