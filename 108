@@ -1,0 +1,48 @@
+/**
+ * Dynamic pricing service
+ */
+
+function calculateDynamicPrice(product, demandFactor) {
+    let price = product.basePrice;
+
+    if (demandFactor > 1.2) {
+        price *= 1.1;
+    } else if (demandFactor < 0.8) {
+        price *= 0.95;
+    }
+
+    return Math.round(price);
+}
+
+function applyFestivalDiscount(price, isFestival) {
+    return isFestival ? price * 0.9 : price;
+}
+
+module.exports = {
+    calculateDynamicPrice,
+    applyFestivalDiscount
+};
+/**
+ * Dynamic pricing service
+ */
+
+function calculateDynamicPrice(product, demandFactor) {
+    let price = product.basePrice;
+
+    if (demandFactor > 1.2) {
+        price *= 1.1;
+    } else if (demandFactor < 0.8) {
+        price *= 0.95;
+    }
+
+    return Math.round(price);
+}
+
+function applyFestivalDiscount(price, isFestival) {
+    return isFestival ? price * 0.9 : price;
+}
+
+module.exports = {
+    calculateDynamicPrice,
+    applyFestivalDiscount
+};
