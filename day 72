@@ -1,0 +1,23 @@
+/**
+ * User activity audit service
+ */
+
+const auditLogs = [];
+
+function logActivity(userId, action, metadata = {}) {
+    auditLogs.push({
+        userId,
+        action,
+        metadata,
+        timestamp: new Date()
+    });
+}
+
+function getAuditLogs() {
+    return auditLogs;
+}
+
+module.exports = {
+    logActivity,
+    getAuditLogs
+};
