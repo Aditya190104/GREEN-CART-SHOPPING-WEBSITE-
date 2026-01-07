@@ -1,0 +1,42 @@
+v/**
+ * Invoice generation service
+ */
+
+function generateInvoice(order) {
+    const lines = order.items.map(item => {
+        return `${item.productName} x ${item.quantity} = ₹${item.price * item.quantity}`;
+    });
+
+    return {
+        invoiceId: "INV-" + Date.now(),
+        orderId: order._id,
+        issuedAt: new Date(),
+        customerId: order.userId,
+        items: lines,
+        totalAmount: order.totalAmount,
+        note: "Thank you for shopping with GreenCart"
+    };
+}
+
+module.exports = { generateInvoice };
+/**
+ * Invoice generation service
+ */
+
+function generateInvoice(order) {
+    const lines = order.items.map(item => {
+        return `${item.productName} x ${item.quantity} = ₹${item.price * item.quantity}`;
+    });
+
+    return {
+        invoiceId: "INV-" + Date.now(),
+        orderId: order._id,
+        issuedAt: new Date(),
+        customerId: order.userId,
+        items: lines,
+        totalAmount: order.totalAmount,
+        note: "Thank you for shopping with GreenCart"
+    };
+}
+
+module.exports = { generateInvoice };
