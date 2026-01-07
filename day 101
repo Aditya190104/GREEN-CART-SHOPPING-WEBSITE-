@@ -1,0 +1,32 @@
+/**
+ * API version v1 routes
+ */
+
+const express = require("express");
+const router = express.Router();
+
+router.get("/status", (req, res) => {
+    res.json({
+        version: "v1",
+        status: "stable",
+        timestamp: new Date()
+    });
+});
+
+module.exports = router;
+/**
+ * API version v1 routes
+ */
+
+const express = require("express");
+const router = express.Router();
+
+router.get("/status", (req, res) => {
+    res.json({
+        version: "v1",
+        status: "stable",
+        timestamp: new Date()
+    });
+});
+
+module.exports = router;
