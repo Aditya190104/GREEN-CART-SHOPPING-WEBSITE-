@@ -1,0 +1,32 @@
+/**
+ * Wishlist schema
+ */
+
+const mongoose = require("mongoose");
+
+const wishlistSchema = new mongoose.Schema({
+    userId: mongoose.Schema.Types.ObjectId,
+    products: [mongoose.Schema.Types.ObjectId],
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+module.exports = mongoose.model("Wishlist", wishlistSchema);
+/**
+ * Wishlist schema
+ */
+
+const mongoose = require("mongoose");
+
+const wishlistSchema = new mongoose.Schema({
+    userId: mongoose.Schema.Types.ObjectId,
+    products: [mongoose.Schema.Types.ObjectId],
+    updatedAt: {
+        type: Date,
+        default: Date.now
+    }
+});
+
+module.exports = mongoose.model("Wishlist", wishlistSchema);
