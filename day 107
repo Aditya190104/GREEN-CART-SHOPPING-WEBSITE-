@@ -1,0 +1,30 @@
+/**
+ * Simple recommendation engine
+ */
+
+function recommendProducts(userHistory, allProducts) {
+    const categories = new Set(
+        userHistory.map(item => item.category)
+    );
+
+    return allProducts.filter(product =>
+        categories.has(product.category)
+    ).slice(0, 5);
+}
+
+module.exports = { recommendProducts };
+/**
+ * Simple recommendation engine
+ */
+
+function recommendProducts(userHistory, allProducts) {
+    const categories = new Set(
+        userHistory.map(item => item.category)
+    );
+
+    return allProducts.filter(product =>
+        categories.has(product.category)
+    ).slice(0, 5);
+}
+
+module.exports = { recommendProducts };
