@@ -1,0 +1,16 @@
+const Review = require("../models/review.model");
+
+async function addReview(userId, productId, rating, comment) {
+    return await Review.create({
+        userId,
+        productId,
+        rating,
+        comment
+    });
+}
+
+async function getProductReviews(productId) {
+    return await Review.find({ productId }).sort({ createdAt: -1 });
+}
+
+module.exports = { addReview, getProductReviews };
