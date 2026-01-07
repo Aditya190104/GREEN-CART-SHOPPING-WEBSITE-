@@ -1,0 +1,20 @@
+/**
+ * System admin controller
+ */
+
+const monitorService = require("../services/monitor.service");
+const auditService = require("../services/audit.service");
+
+const getSystemReport = (req, res) => {
+    const systemStats = monitorService.getSystemStats();
+    const auditLogs = auditService.getAuditLogs();
+
+    res.json({
+        success: true,
+        system: systemStats,
+        audits: auditLogs.slice(-10),
+        generatedAt: new Date()
+    });
+};
+
+module.exports = { getSystemReport };
