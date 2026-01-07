@@ -1,0 +1,29 @@
+/**
+ * Application-wide constants and enums
+ */
+
+const USER_ROLES = Object.freeze({
+    ADMIN: "ADMIN",
+    USER: "USER",
+    DELIVERY: "DELIVERY"
+});
+
+const ORDER_STATUS = Object.freeze({
+    PLACED: "PLACED",
+    CONFIRMED: "CONFIRMED",
+    SHIPPED: "SHIPPED",
+    DELIVERED: "DELIVERED",
+    CANCELLED: "CANCELLED"
+});
+
+const PAYMENT_STATUS = Object.freeze({
+    PENDING: "PENDING",
+    SUCCESS: "SUCCESS",
+    FAILED: "FAILED"
+});
+
+module.exports = {
+    USER_ROLES,
+    ORDER_STATUS,
+    PAYMENT_STATUS
+};
