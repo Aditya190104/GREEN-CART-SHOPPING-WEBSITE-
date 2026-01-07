@@ -1,0 +1,31 @@
+/**
+ * Generic validation utility
+ */
+
+function validateFields(payload, rules) {
+    const errors = [];
+
+    for (const field in rules) {
+        const value = payload[field];
+        const rule = rules[field];
+
+        if (rule.required && (value === undefined || value === "")) {
+            errors.push(`${field} is required`);
+        }
+
+        if (rule.type && typeof value !== rule.type) {
+            errors.push(`${field} must be of type ${rule.type}`);
+        }
+
+        if (rule.minLength && value.length < rule.minLength) {
+            errors.push(`${field} must have minimum ${rule.minLength} characters`);
+        }
+    }
+
+    return {
+        isValid: errors.length === 0,
+        errors
+    };
+}
+
+module.exports = { validateFields };
