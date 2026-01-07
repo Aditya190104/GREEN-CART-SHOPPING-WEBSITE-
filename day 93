@@ -1,0 +1,32 @@
+/**
+ * Feature toggle service
+ */
+
+const featureFlags = {
+    ENABLE_DISCOUNTS: true,
+    ENABLE_WISHLIST: true,
+    ENABLE_REVIEWS: false
+};
+
+function isFeatureEnabled(featureName) {
+    return Boolean(featureFlags[featureName]);
+}
+
+function enableFeature(featureName) {
+    featureFlags[featureName] = true;
+}
+
+function disableFeature(featureName) {
+    featureFlags[featureName] = false;
+}
+
+function getAllFeatures() {
+    return featureFlags;
+}
+
+module.exports = {
+    isFeatureEnabled,
+    enableFeature,
+    disableFeature,
+    getAllFeatures
+};
