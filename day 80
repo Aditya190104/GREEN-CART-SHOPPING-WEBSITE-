@@ -1,0 +1,37 @@
+const Wishlist = require("../models/wishlist.model");
+
+async function addToWishlist(userId, productId) {
+    return await Wishlist.findOneAndUpdate(
+        { userId },
+        { $addToSet: { products: productId } },
+        { upsert: true, new: true }
+    );
+}
+
+async function removeFromWishlist(userId, productId) {
+    return await Wishlist.findOneAndUpdate(
+        { userId },
+        { $pull: { products: productId } },
+        { new: true }
+    );
+}
+
+module.exports = { addToWishlist, removeFromWishlist };
+/**
+ * CSV export utility
+ */
+
+function exportToCSV(data) {
+    if (!Array.isArray(data)) {
+        throw new Error("Invalid data format");
+    }
+
+    const headers = Object.keys(data[0] || {});
+    const rows = data.map(item =>
+        headers.map(h => item[h]).join(",")
+    );
+
+    return [headers.join(","), ...rows].join("\n");
+}
+
+module.exports = { exportToCSV };
