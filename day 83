@@ -1,0 +1,34 @@
+/**
+ * System monitoring utilities
+ */
+
+const os = require("os");
+
+function getSystemStats() {
+    return {
+        platform: os.platform(),
+        memoryUsage: process.memoryUsage(),
+        cpuCount: os.cpus().length,
+        uptime: process.uptime(),
+        loadAverage: os.loadavg()
+    };
+}
+
+module.exports = { getSystemStats };
+/**
+ * System monitoring utilities
+ */
+
+const os = require("os");
+
+function getSystemStats() {
+    return {
+        platform: os.platform(),
+        memoryUsage: process.memoryUsage(),
+        cpuCount: os.cpus().length,
+        uptime: process.uptime(),
+        loadAverage: os.loadavg()
+    };
+}
+
+module.exports = { getSystemStats };
