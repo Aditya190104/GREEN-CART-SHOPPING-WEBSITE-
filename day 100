@@ -1,0 +1,44 @@
+/**
+ * Order history aggregation
+ */
+
+const Order = require("../models/order.model");
+
+async function getUserOrderHistory(userId) {
+    return await Order.aggregate([
+        { $match: { userId } },
+        {
+            $group: {
+                _id: "$status",
+                orders: { $push: "$$ROOT" },
+                totalAmount: { $sum: "$totalAmount" }
+            }
+        },
+        { $sort: { _id: 1 } }
+    ]);
+}
+
+module.exports = { getUserOrderHistory };
+/**
+ * Soft delete mongoose plugin
+ */
+
+module.exports = function softDelete(schema) {
+    schema.add({
+        isDeleted: {
+            type: Boolean,
+            default: false
+        },
+        deletedAt: Date
+    });
+
+    schema.methods.softDelete = function () {
+        this.isDeleted = true;
+        this.deletedAt = new Date();
+        return this.save();
+    };
+
+    schema.statics.findActive = function (query = {}) {
+        return this.find({ ...query, isDeleted: false });
+    };
+};
