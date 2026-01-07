@@ -1,0 +1,41 @@
+const express = require("express");
+const router = express.Router();
+
+router.get("/status", (req, res) => {
+    res.json({
+        version: "v2",
+        status: "beta",
+        timestamp: new Date()
+    });
+});
+
+module.exports = router;
+/**
+ * API Gateway for GreenCart
+ */
+
+const express = require("express");
+const sanitizeRequest = require("../middleware/sanitize.middleware");
+const v1Routes = require("../routes/v1.routes");
+const v2Routes = require("../routes/v2.routes");
+
+const app = express();
+
+app.use(express.json());
+app.use(sanitizeRequest);
+
+// Versioned APIs
+app.use("/api/v1", v1Routes);
+app.use("/api/v2", v2Routes);
+
+// Gateway health
+app.get("/", (req, res) => {
+    res.json({
+        service: "GreenCart API Gateway",
+        versions: ["v1", "v2"],
+        status: "RUNNING",
+        timestamp: new Date()
+    });
+});
+
+module.exports = app;
