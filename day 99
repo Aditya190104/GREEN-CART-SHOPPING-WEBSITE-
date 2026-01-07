@@ -1,0 +1,50 @@
+/**
+ * Search service with relevance scoring
+ */
+
+function calculateScore(product, keyword) {
+    let score = 0;
+    if (product.name.toLowerCase().includes(keyword)) score += 5;
+    if (product.category.toLowerCase().includes(keyword)) score += 3;
+    if (product.description?.toLowerCase().includes(keyword)) score += 2;
+    return score;
+}
+
+function searchProducts(products, keyword) {
+    const normalized = keyword.toLowerCase();
+
+    return products
+        .map(product => ({
+            ...product,
+            score: calculateScore(product, normalized)
+        }))
+        .filter(p => p.score > 0)
+        .sort((a, b) => b.score - a.score);
+}
+
+module.exports = { searchProducts };
+/**
+ * Search service with relevance scoring
+ */
+
+function calculateScore(product, keyword) {
+    let score = 0;
+    if (product.name.toLowerCase().includes(keyword)) score += 5;
+    if (product.category.toLowerCase().includes(keyword)) score += 3;
+    if (product.description?.toLowerCase().includes(keyword)) score += 2;
+    return score;
+}
+
+function searchProducts(products, keyword) {
+    const normalized = keyword.toLowerCase();
+
+    return products
+        .map(product => ({
+            ...product,
+            score: calculateScore(product, normalized)
+        }))
+        .filter(p => p.score > 0)
+        .sort((a, b) => b.score - a.score);
+}
+
+module.exports = { searchProducts };
