@@ -1,0 +1,26 @@
+/**
+ * Background job queue simulation
+ */
+
+class JobQueue {
+    constructor() {
+        this.jobs = [];
+    }
+
+    add(jobName, payload) {
+        this.jobs.push({
+            jobName,
+            payload,
+            createdAt: new Date()
+        });
+    }
+
+    process() {
+        while (this.jobs.length) {
+            const job = this.jobs.shift();
+            console.log(`Processing job: ${job.jobName}`);
+        }
+    }
+}
+
+module.exports = new JobQueue();
