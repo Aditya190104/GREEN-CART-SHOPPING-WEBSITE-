@@ -1,0 +1,36 @@
+/**
+ * CSV export utility
+ */
+
+function exportToCSV(data) {
+    if (!Array.isArray(data)) {
+        throw new Error("Invalid data format");
+    }
+
+    const headers = Object.keys(data[0] || {});
+    const rows = data.map(item =>
+        headers.map(h => item[h]).join(",")
+    );
+
+    return [headers.join(","), ...rows].join("\n");
+}/**
+ * CSV export utility
+ */
+
+function exportToCSV(data) {
+    if (!Array.isArray(data)) {
+        throw new Error("Invalid data format");
+    }
+
+    const headers = Object.keys(data[0] || {});
+    const rows = data.map(item =>
+        headers.map(h => item[h]).join(",")
+    );
+
+    return [headers.join(","), ...rows].join("\n");
+}
+
+module.exports = { exportToCSV };
+
+
+module.exports = { exportToCSV };
