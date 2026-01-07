@@ -1,0 +1,30 @@
+/**
+ * Email service abstraction (mocked)
+ */
+
+function sendEmail({ to, subject, body }) {
+    if (!to || !subject || !body) {
+        throw new Error("Invalid email payload");
+    }
+
+    return {
+        messageId: "MSG-" + Date.now(),
+        to,
+        subject,
+        status: "SENT",
+        sentAt: new Date()
+    };
+}
+
+function sendWelcomeEmail(user) {
+    return sendEmail({
+        to: user.email,
+        subject: "Welcome to GreenCart",
+        body: `Hello ${user.name}, welcome to GreenCart platform.`
+    });
+}
+
+module.exports = {
+    sendEmail,
+    sendWelcomeEmail
+};
