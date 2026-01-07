@@ -1,0 +1,34 @@
+/**
+ * Discount and coupon calculation service
+ */
+
+function applyDiscount(totalAmount, coupon) {
+    if (!coupon) return totalAmount;
+
+    if (coupon.type === "PERCENT") {
+        return totalAmount - (totalAmount * coupon.value) / 100;
+    }
+
+    if (coupon.type === "FLAT") {
+        return Math.max(0, totalAmount - coupon.value);
+    }
+
+    return totalAmount;
+}
+
+function validateCoupon(coupon, orderAmount) {
+    if (!coupon.active) {
+        throw new Error("Coupon is inactive");
+    }
+
+    if (orderAmount < coupon.minOrderValue) {
+        throw new Error("Order amount too low for coupon");
+    }
+
+    return true;
+}
+
+module.exports = {
+    applyDiscount,
+    validateCoupon
+};
